@@ -16,7 +16,10 @@ A one-stop-shop for your software engineering needs
 
 getHub Engineers
 
-[Josephine Chen](https://github.com/ChenJosephine)  
+[Josephine Chen](https://github.com/ChenJosephine) 
+
 [Alexa Nunes](https://github.com/A13xaNunes)
+
 [Paul Yi](https://github.com/paul-s-yi)
+
 [Jacob Policano](https://github.com/jdpolicano)

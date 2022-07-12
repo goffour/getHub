@@ -8,6 +8,9 @@ const session = require('express-session');
 const PORT = 3000;
 const app = express();
 
+const userRouter = require('./routes/userRouter');
+const productsRouter = require('./routes/productsRouter');
+
 //parse body request
  app.use(express.json());
  app.use(express.urlencoded({ extended: true }));
