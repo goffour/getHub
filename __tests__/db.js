@@ -29,7 +29,7 @@ describe('Server function tests', () => {
 				"username" VARCHAR(255),
 				"password" VARCHAR(255),
 				"address" VARCHAR(255),
-				"zipcode" VARCHAR(255)
+				"zipcode" VARCHAR(255),
 				CONSTRAINT user_username_email_key UNIQUE (username, email)
 			);
 		`;
@@ -71,16 +71,15 @@ describe('Server function tests', () => {
 	describe('Route integration', () => {
 
 		//The server should serve the initial index.html page
-		describe('/', ()=> {
-			// describe('GET', () => {
-			// 	it('responds with 200 status and text/html content type', () => {
 
-			// 	});
-
-			// 	xit('responds to invalid request with 400 status and error message in body', () => {
-
-			// 	});
-			// })
+		describe('/', () => {
+			describe('GET', ()=> {
+				it('should return status of 200 and a content-type of text/html', async () => {
+					const response = await request(server)
+							.get('/')
+					expect(response.headers['content-type']).toMatch(/text\/html/);
+				});
+			});
 		});
 
 		//user routes include signup and login and returns an object containing verified and history
