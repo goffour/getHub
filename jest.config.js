@@ -7,5 +7,5 @@ module.exports = {
   "verbose": true,
   "testEnvironment": "jest-environment-jsdom",
   "automock": false,
-  "setupFiles": ['./jest-setup.js', './server/server.js']
+  // "setupFiles": ['./jest-setup.js']
 };
