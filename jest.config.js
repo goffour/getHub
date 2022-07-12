@@ -8,5 +8,4 @@ module.exports = {
   "testEnvironment": "jest-environment-jsdom",
   "automock": false,
   "setupFiles": ['./jest-setup.js', './server/server.js']
-  
 };
