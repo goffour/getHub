@@ -6,6 +6,7 @@ const Navbar = () => {
   return(
   <div id='navbar'>
     <img src={ProfilePic} alt='placeholder profile photo'/>
+
   </div>
   );
 }

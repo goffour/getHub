@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'wouter';
+import { useLocation, Link } from 'wouter';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -32,7 +32,10 @@ const Login = () => {
     <div id='loginContainer'>
       <input className='inputField' placeholder='Username' value={username} onChange={e => setUsername(e.target.value)}/>
       <input className='inputField' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)}/>
-      <button onClick={checkLogin}>Login</button>
+      <button id='loginBtn' onClick={checkLogin}>Login</button>
+      <Link href='/signup'>
+        <a className='link'>Don't have an account? Sign up</a>
+      </Link>
     </div>
   );
 }
