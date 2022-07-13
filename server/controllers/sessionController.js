@@ -1,6 +1,8 @@
 const { request } = require('express');
-const db = require('../../database/dbConnection');
-
+let db = require('../../database/dbConnection');
+if (process.env.NODE_ENV === 'test'){
+	db = require('../../database/testdb');
+}
 
 const sessionController = {};
 
