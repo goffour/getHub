@@ -29,9 +29,9 @@ router.get('/products',
 	return res.locals.order and res.locals.history
 */
 router.post('/purchase',
-	// orderController.createOrder,
-	// orderController.getOrders,
-	// productController.buyProducts,
+	orderController.createOrder,
+	productController.buyProducts,
+	orderController.updateOrderList,
 	(req, res)=> {
 		return res.status(200).json({order: res.locals.order, history: res.locals.history});
 });
