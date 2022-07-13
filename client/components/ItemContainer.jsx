@@ -8,7 +8,13 @@ import StoreItem from './StoreItem.jsx';
 const ItemContainer = (props) => {
   return (
     <div className='item-container'>
-      {props.data.map(item => <StoreItem {...item} />)}
+      {props.data.map(item =>
+        <StoreItem
+          data={item}
+          setCartHistory={props.setCartHistory}
+          cartHistory={props.cartHistory}
+        />
+      )}
     </div>
   )
 }

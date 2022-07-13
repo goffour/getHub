@@ -47,7 +47,7 @@ describe('Integration Test for Items Container', () => {
   
   test('Should render correct numebr of imgs, descriptions, prices, and buttons', () => {
     const imgElements = items.queryAllByRole('img');
-    const btnElements = items.queryAllByRole('button', {name: 'Buy'});
+    const btnElements = items.queryAllByRole('button', {name: 'Add to Cart'});
     const descElements = items.queryAllByText(/description:/i);
     const priceElements = items.queryAllByText(/price:/i);
 

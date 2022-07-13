@@ -2,7 +2,8 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../lib/AuthProvider.jsx';
 import { useLocation, Link } from 'wouter';
 
-const Login = () => {
+const Login = (props) => {
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [location, setLocation] = useLocation();
@@ -23,9 +24,12 @@ const Login = () => {
     })
     .then (response => response.json())
     .then (data => {
-      if (data.verified) {
-        userContext.setUser(data);
-        setLocation('/dashboard');
+      const { history } = data;
+      const { isVerified, first_name, last_name, username, email } = data.verified; 
+      if (isVerified) {
+        userContext.setUser({...userContext, first_name, last_name, username, email});
+        props.setHistory(history);
+        setLocation('/dashboard/store');
       }
     })
     .catch (err => {
@@ -36,9 +40,9 @@ const Login = () => {
 
 
   const handleClick = () => {
-    let verified = true;
-    userContext.setUser({...userContext, verified, first_name: 'Paul', last_name: 'Yi'});
-    return setLocation('/dashboard');
+    let isVerified = true;
+    userContext.setUser({...userContext, isVerified, first_name: 'Paul', last_name: 'Yi'});
+    return setLocation('/dashboard/store');
   }
 
   // TODO: change onclick back to checkLogin once the function works as intended
@@ -47,9 +51,7 @@ const Login = () => {
       <input className='inputField' placeholder='Username' value={username} onChange={e => setUsername(e.target.value)}/>
       <input className='inputField' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)}/>
       <button id='loginBtn' onClick={handleClick}>Login</button>
-      <Link href='/signup'>
-        <a className='link'>Don't have an account? Sign up</a>
-      </Link>
+      <a className='link' onClick={() => setLocation('/signup')}>Don't have an account? Sign up</a>
     </div>
   );
 }
