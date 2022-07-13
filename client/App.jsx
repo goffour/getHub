@@ -50,7 +50,7 @@ const App = (props) => {
   const [store, setStore] = useState(dummyData);
   const [history, setHistory] = useState([]); 
   const [cartHistory, setCartHistory] = useState([]);
-  console.log('updated cart histroy', cartHistory)
+  // console.log('updated cart histroy', cartHistory);
   return (
     <AuthProvider>
       <Route path='/'>
