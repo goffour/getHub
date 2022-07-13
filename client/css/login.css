@@ -1,0 +1,87 @@
+
+a:visited {
+  text-decoration: none;
+	text-decoration-color: whitesmoke;
+}
+
+
+a:hover {
+	text-decoration-color: #FE5F55;
+}
+
+html {
+	font-size: 16px;
+	font-family: 'Inconsolata';
+}
+
+body {
+	box-sizing: border-box;
+	margin: 0px;
+	background-color: #495867;
+	color: #F7F7FF;
+}
+
+#login{
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#loginContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	width: 300px;
+	height: 400px;
+	border: 1px solid #F7F7FF;
+	border-radius: 5px;
+	box-shadow: 5px 5px 20px 2px #577399;
+}
+
+.inputField {
+	height: 25px;
+	width: 150px;
+	background-color: rgb(50, 60, 70);
+	color: #F7F7FF;
+	border: none;
+	border-radius: 5px;
+}
+
+input::placeholder {
+	padding-left: 5px;
+	color: #F7F7FF;
+}
+
+
+#loginBtn {
+	height: 25px;
+	width: 100px;
+	background:rgb(50, 60, 70);
+	color:#F7F7FF;
+	border: 1px solid whitesmoke;
+	border-radius: 5px;
+}
+
+#loginBtn:hover{
+	background: #577399;
+	color: white;
+	box-shadow: 5px 5px 10px 2px #577399;
+}
+
+
+.link{
+	margin-top: 20px;
+	text-decoration: underline;
+}
+
+.link:hover{
+	color: #FE5F55;
+}
+
+.link:visited{
+	color: whitesmoke;
+}

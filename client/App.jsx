@@ -10,45 +10,16 @@ import Shop from '../client/components/Shop.jsx';
 import Cart from '../client/Components/Cart.jsx';
 import Profile from '../client/Components/Profile.jsx';
 
-const dummyData = [
-  {
-    _id: 0,
-    seller_id: 0,
-    desc: 'An item made by jake',
-    category: 'clothing',
-    price: 100,
-    file_location: 0
-  },
-  {
-    _id: 1,
-    seller_id: 1,
-    desc: 'An item made by paul',
-    category: 'clothing',
-    price: 1000,
-    file_location: 1
-  },
-  {
-    _id: 2,
-    seller_id: 2,
-    desc: 'An item made by josephine',
-    category: 'Misc',
-    price: 10000,
-    file_location: 2
-  },
-  {
-    _id: 3,
-    seller_id: 3,
-    desc: 'An item made by Alexa',
-    category: 'Rolex',
-    price: 100000,
-    file_location: 3
-  }
-];
-
+import '../client/css/index.css';
+import '../client/css/shop.css';
+import '../client/css/login.css';
+import '../client/css/signup.css';
+import '../client/css/navbar.css';
+import '../client/css/cart.css';
 
 const App = (props) => {
 
-  const [store, setStore] = useState(dummyData);
+  const [store, setStore] = useState([]);
   const [history, setHistory] = useState([]); 
   const [cartHistory, setCartHistory] = useState([]);
   console.log('updated cart histroy', cartHistory)
@@ -82,7 +53,8 @@ const App = (props) => {
             <Shop setStore ={setStore}>
               {component}
             </Shop>
-          </ProtectedRoute>)
+          </ProtectedRoute> 
+          )
         }}
       </Route>
     </AuthProvider>

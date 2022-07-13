@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;1,100;1,200;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+/* @font-face {
+  font-family: "Fira Sans";
+  src: url('fonts/fira/eot/FiraSans-Regular.eot');
+  src: url('fonts/fira/eot/FiraSans-Regular.eot') format('embedded-opentype'),
+       url('fonts/fira/woff2/FiraSans-Regular.woff2') format('woff2'),
+       url('fonts/fira/woff/FiraSans-Regular.woff') format('woff'),
+       url('fonts/fira/woff2/FiraSans-Regular.ttf') format('truetype');
+} */
+/* /* a:link {
+  text-decoration: none;
+} */
+
+
+
+/* a:visited {
+  text-decoration: none;
+	text-decoration-color: whitesmoke;
+}
+
+a:hover {
+	text-decoration-color: #FE5F55;
+} */
+
+html {
+	font-size: 16px;
+	font-family: 'Inconsolata';
+}
+
+body {
+	box-sizing: border-box;
+	margin: 0px;
+	background-color: #495867;
+	color: #F7F7FF;
+}

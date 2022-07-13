@@ -63,12 +63,15 @@ const Cart = (props) => {
   return(
     <div id='cartContainer'>
       {cartItems}
-      <h1>
+      <div id="cart-details">
+        <h1>
         Total Purchase Amount:
-        {formatter.format(totalCost)}
-      </h1>
-      <button id='btn-checkout' onClick={buyItems}>Proceed to Checkout</button>
-      <a className='link' onClick={() => setLocation('/dashboard/store')}>Keep shopping</a>
+          {formatter.format(totalCost)}
+        </h1>
+        <button id='btn-checkout' onClick={buyItems}>Proceed to Checkout</button>
+        <a className='link' onClick={() => setLocation('/dashboard/store')}>Keep shopping</a>
+      </div>
+       
     </div>
   )
 
