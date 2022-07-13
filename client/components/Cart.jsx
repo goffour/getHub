@@ -53,7 +53,7 @@ const Cart = (props) => {
     cartItems.push(
     <div className='cartListContainer'>
       <div className='itemText'>
-        <p>{item.desc}</p>
+        <p>{item.description}</p>
         <p>{formatter.format(item.price)}</p>
       </div>
       <button className='btn-delete' id={item._id} onClick={() => removeFromCart(item._id)}>Remove</button>

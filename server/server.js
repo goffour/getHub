@@ -19,6 +19,11 @@ const productsRouter = require('./routes/productsRouter');
 
 console.log('entered server');
 
+app.get('/client/assets/:file', (req, res) => {
+  const img = req.params.file;
+  res.status(200).sendFile(path.resolve(__dirname, '../client/assets/' + img))
+});
+
 //server logic
 // User and Product routing
 app.use('/user', userRouter);
