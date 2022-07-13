@@ -27,6 +27,8 @@ orderController.createOrder = (req, res, next) => {
 	const query = `INSERT INTO "order" (buyer_id, shipping_status, cost, date)
 									VALUES ($1, $2, $3, $4)
 									RETURNING _id, buyer_id, shipping_status, cost, date`;
+
+	//todo: cost and dates need to be changed
 	const date = new Date();
 	const values = [buyer_id, 'pending', '100.00', date];
 
