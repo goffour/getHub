@@ -17,7 +17,7 @@ const productsRouter = require('./routes/productsRouter');
  app.use(cors());
  app.use(cookieParser());
 
-
+console.log('entered server');
 
 //server logic
 // User and Product routing
@@ -33,9 +33,6 @@ if (process.env.NODE_ENV == 'production'){
     return res.status(200).sendFile(path.join(__dirname, '../index.html'));
 });
 }
-
-
-
 
 
 // catch-all route handler for any requests to an unknown route

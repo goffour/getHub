@@ -51,6 +51,7 @@ const App = (props) => {
   const [history, setHistory] = useState([]); 
   const [cartHistory, setCartHistory] = useState([]);
   console.log('updated cart histroy', cartHistory)
+  // console.log('updated Store', store);
   return (
     <AuthProvider>
       <Route path='/'>
@@ -73,11 +74,11 @@ const App = (props) => {
               break;
             case 'store':
               component = <ItemContainer data={store} setCartHistory={setCartHistory} cartHistory={cartHistory} />;
-              break
+              break;
           };
           return (
           <ProtectedRoute>
-            <Shop>
+            <Shop setStore ={setStore}>
               {component}
             </Shop>
           </ProtectedRoute>)
