@@ -54,6 +54,7 @@ orderController.createOrder = (req, res, next) => {
 };
 
 //retrieve orders for a certain user with user_id and store in res.locals.history
+
 orderController.getOrderList = (req, res, next) => {
 
 	const { user_id } = req.body.order;
@@ -72,6 +73,7 @@ orderController.getOrderList = (req, res, next) => {
 				message: {err: 'could not retrieve order list'}
 			})
 		});
+
 }
 
 orderController.updateOrderList = (req, res, next) => {

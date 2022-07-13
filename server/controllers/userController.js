@@ -1,4 +1,5 @@
 const { request } = require('express');
+
 let db = require('../../database/dbConnection');
 if (process.env.NODE_ENV === 'test'){
 	db = require('../../database/testdb');
@@ -8,6 +9,7 @@ const bcrypt = require('bcryptjs');
 
 //salt hashing passwords
 //const SALT_WORK_FACTOR = 10;
+
 
 
 const userController = {};
@@ -49,6 +51,7 @@ userController.createUser = (req, res, next) => {
 	}
 
 	//generate a hashed password
+
 	// bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
 	// 	if (err) return next({
 	// 		'log': 'User Controller: Create user - Encryption error',
@@ -65,6 +68,7 @@ userController.createUser = (req, res, next) => {
 
 	// 	});
 	// });
+
 
 		//query for creating new user into database
 		const query = `INSERT INTO "user" (first_name, last_name, email, username, password, address, zipcode) 
@@ -85,10 +89,12 @@ userController.createUser = (req, res, next) => {
 					return next();
 				})
 				.catch(err => {
+
 					return next({
 						'log': 'User Controller: Create user - Unable to create new user',
 						'message': { err : 'userController.createUser: ERROR: Unable to create new user'}
 					})
+
 				});
 
 };

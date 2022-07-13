@@ -14,7 +14,9 @@ return verified object
 router.post('/signup', 
 	userController.createUser,
 	cookieController.setSSIDCookie, 
+
 	orderController.getOrderList,
+
 	(req, res)=> {
 		return res.status(200).json({verified: res.locals.verified, history: res.locals.history});
 });
@@ -31,6 +33,7 @@ router.post('/login',
 	userController.loginUser,
 	cookieController.setSSIDCookie,
 	orderController.getOrderList,
+
 	(req, res) => {
 		return res.status(200).json({verified: res.locals.verified, history: res.locals.history});
 }); 

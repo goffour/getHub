@@ -32,7 +32,6 @@ router.post('/purchase',
 	orderController.createOrder,
 	productController.buyProducts,
 	orderController.updateOrderList,
-
 	(req, res)=> {
 		return res.status(200).json({order: res.locals.order, history: res.locals.history});
 });
