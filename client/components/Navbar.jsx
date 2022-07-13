@@ -8,15 +8,25 @@ const Navbar = () => {
   
   return(
     <div id='navbar'>
-      <h2>Welcome, {userContext.first_name}</h2>
-      <Link to='/profile'>
-        <p id=''>{userContext.first_name[0]}{userContext.last_name[0]}</p>
-      </Link>
 
+      <div id='navbar-left'>
+        <p id='gethub-title'>GetHub</p>
+        <p className='welcome'>Welcome, {userContext.first_name}</p>
+      </div>
+      {/* <div id='welcome'>
+      </div> */}
+      <div id='profile-link'>
+        <Link to='/profile'>
+          <p id=''>{userContext.first_name[0]}{userContext.last_name[0]}</p>
+        </Link>
+      </div>
+
+      <div>
       <Link to='/dashboard/cart'>
-        <a>Cart</a>
-        {/* <img src={profilePic}/> */}
-      </Link>
+          <a className='link-to-cart'>Cart</a>
+          {/* <img src={profilePic}/> */}
+        </Link>
+      </div>
   </div>
   );
 }

@@ -50,12 +50,15 @@ const Login = (props) => {
 
   // TODO: change onclick back to checkLogin once the function works as intended
   return(
+    <div id="login">
     <div id='loginContainer'>
       <input className='inputField' placeholder='Username' value={username} onChange={e => setUsername(e.target.value)}/>
-      <input className='inputField' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)}/>
+      <input className='inputField' type='password' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)}/>
       <button id='loginBtn' onClick={checkLogin}>Login</button>
-      <a className='link' onClick={() => setLocation('/signup')}>Don't have an account? Sign up</a>
+      <span>Don't have an account? <a className='link' onClick={() => setLocation('/signup')}>Sign up</a></span>
     </div>
+    </div>
+
   );
 }
 

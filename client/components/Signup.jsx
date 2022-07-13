@@ -35,17 +35,22 @@ const Signup = () => {
     })
   }
   return (
+    <div id="signup">
     <div id='signupContainer'>
       <input className='inputField' placeholder='First name' value={firstName} onChange={e=>setFirstName(e.target.value)} />
       <input className='inputField' placeholder='Last name' value={lastName} onChange={e=>setLastName(e.target.value)} />
       <input className='inputField' placeholder='Email' value={email} onChange={e=>setEmail(e.target.value)} />
       <input className='inputField' placeholder='Username' value={username} onChange={e=>setUsername(e.target.value)} />
       <input className='inputField' placeholder='Password' type='password' value={password} onChange={e=>setPassword(e.target.value)} />
-      <button onClick={checkSignup}>Sign up</button>
-      <Link href='/'>
-        <a className='link'>Already have an account? Log in</a>
-      </Link>
+      <button id="signupBtn" onClick={checkSignup}>Sign up</button>
+      <span>Already have an account? <Link href='/'>
+         <a className='link'>Log in</a>
+      </Link></span>
+      
+
     </div>
+    </div>
+
   )
 }
 
