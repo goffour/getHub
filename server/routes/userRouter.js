@@ -13,7 +13,7 @@ return verified object
 
 router.post('/signup', 
 	userController.createUser,
-	cookieController.setSSIDCookie, 
+	// cookieController.setSSIDCookie, 
 
 	orderController.getOrderList,
 
@@ -31,7 +31,7 @@ return verified object and order object
 
 router.post('/login',
 	userController.loginUser,
-	cookieController.setSSIDCookie,
+	// cookieController.setSSIDCookie,
 	orderController.getOrderList,
 
 	(req, res) => {

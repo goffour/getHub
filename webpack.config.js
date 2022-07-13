@@ -38,7 +38,7 @@ module.exports = {
         ]
       },
 			{//test gives regex file path, use is name of loader
-				test: /\.(png|jpg|gif|svg)$/i, 
+				test: /\.(png|jpg|jpeg|gif|svg)$/i, 
 				type: 'asset/resource',
 				exclude: /node_modules/
 			},
@@ -58,7 +58,7 @@ module.exports = {
 
     proxy: {
       '/user' : 'http://localhost:3000',
-			'/products' : 'http://localhost:3000'
+			'/products' : 'http://localhost:3000',
     },
 
     compress: true,

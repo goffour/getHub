@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../lib/AuthProvider.jsx';
-import { useLocation, Link } from 'wouter';
+import { useLocation, Link, Redirect } from 'wouter';
 
 const Login = (props) => {
   
@@ -11,25 +11,28 @@ const Login = (props) => {
   
   // TODO: confirm route/API call with backend team
   const checkLogin = () => {
-    const userInfo = {
+    const credentials = {
       username: username,
       password: password
     }
-    fetch('/user/login', {
+    fetch('http://localhost:3000/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/JSON'
       },
-      body: JSON.stringify(userInfo)
+      body: JSON.stringify({credentials})
     })
     .then (response => response.json())
     .then (data => {
       const { history } = data;
-      const { isVerified, first_name, last_name, username, email } = data.verified; 
+      const { isVerified, first_name, last_name, username, email, _id } = data.verified; 
+
+      console.log('in login component, returned data', data);
       if (isVerified) {
-        userContext.setUser({...userContext, first_name, last_name, username, email});
+        userContext.setUser({...userContext, isVerified, first_name, last_name, username, email, _id});
         props.setHistory(history);
-        setLocation('/dashboard/store');
+        
+        return setLocation('/dashboard/store');
       }
     })
     .catch (err => {
@@ -50,7 +53,7 @@ const Login = (props) => {
     <div id='loginContainer'>
       <input className='inputField' placeholder='Username' value={username} onChange={e => setUsername(e.target.value)}/>
       <input className='inputField' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)}/>
-      <button id='loginBtn' onClick={handleClick}>Login</button>
+      <button id='loginBtn' onClick={checkLogin}>Login</button>
       <a className='link' onClick={() => setLocation('/signup')}>Don't have an account? Sign up</a>
     </div>
   );

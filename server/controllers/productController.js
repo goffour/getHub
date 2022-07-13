@@ -38,7 +38,9 @@ productController.buyProducts = (req, res, next) => {
 	const { products } = req.body.order;
 	const { _id } = res.locals.order;
 
-	let productQuery = `UPDATE product SET purchased=true, order_id=${_id} WHERE _id IN (`;
+	console.log('products in buyProducts', products);
+
+	let productQuery = `UPDATE product SET purchased='true', order_id=${_id} WHERE _id IN (`;
 	for (let i = 0; i < products.length; i++){
 		productQuery += products[i];
 	}
