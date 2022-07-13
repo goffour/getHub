@@ -63,6 +63,14 @@ describe('Server function tests', () => {
 		await db.query(createUserTable);
 		await db.query(createOrderTable);
 		await db.query(createProductTable);
+
+
+		//populate test database with one fake product
+		const createTestProduct = `
+			INSERT INTO product (description, category, price, purchased)
+			VALUES ('tarzan', 'dvds', 10.99, false);
+		`;
+		await db.query(createTestProduct);
 	});
 
 	//afterAll to drop user, order, and product tables
@@ -85,61 +93,140 @@ describe('Server function tests', () => {
 		//user routes include signup and login and returns an object containing verified and history
 		//res.cookie corresponds to user_id
 		describe('/user', ()=> {
-			// describe('/signup', () => {
-			// 	it('responds with 200 status and application/json content type', () => {
+			describe('/signup', () => {
+				//responds with a verified object containing credentials and order history
+				xit('responds with 200 status and application/json content type', async () => {
+					const response = await request(server)
+						.post('/user/signup')
+						.send({
+							credentials: {
+							first_name: 'phil',
+							last_name: 'collins',
+							email: 'tarzan@pc.com',
+							username: 'realphilcollins',
+							password: '123'
+						}})
+						.set('Accept', 'application/json');
+						console.log(response.body);
+					expect(response.headers['content-type']).toMatch(/json/);
+					expect(response.status).toEqual(200);
+					expect(response.body.verified.isVerified).toBe(true);
+					expect(response.body.verified.first_name).toBe('phil');
+					expect(response.body.verified.last_name).toBe('collins');
+					expect(response.body.verified.email).toBe('tarzan@pc.com');
+				});
 
-			// 	});
 
-			// 	xit('responds with a verified object containing credentials and order history', ()=> {
+				xit('responds to invalid request with 500 status', async () => {
+						const response = await request(server)
+							.post('/user/signup')
+							.send('bad-request')
+							.set('Accept', 'application/json');
+						expect(response.headers['content-type']).toMatch(/json/);
+						expect(response.status).toEqual(500);		
+				});
 
-			// 	});
+			});
 
-			// 	xit('responds to invalid request with 500 status and error message in body', () => {
-			
-			// 	});
+			describe('/login', () => {
+				// responds with a verified object containing credentials and order history
+				it('responds with 200 status and application/json content type', async () => {
+					const response = await request(server)
+						.post('/user/login')
+						.send({credentials: {
+							username: 'realphilcollins',
+							password: '123'
+						}})
+						.set('Accept', 'application/json');
+					expect(response.headers['content-type']).toMatch(/json/);
+					expect(response.status).toEqual(200);
+					expect(response.body.verified.isVerified).toBe(true);
+					expect(response.body.verified.first_name).toBe('phil');
+					expect(response.body.verified.last_name).toBe('collins');
+					expect(response.body.verified.email).toBe('tarzan@pc.com');
+				});
 
-			// });
+				xit('responds to invalid request with 500 status and error message in body', async () => {
+					const response = await request(server)
+					.post('/user/login')
+					.send('bad-request')
+					.set('Accept', 'application/json');
+				expect(response.headers['content-type']).toMatch(/json/);
+				expect(response.status).toEqual(500);		
+				});
 
-			// describe('/login', () => {
-			// 	it('responds with 200 status and application/json content type', () => {
-				
-			// 	});
-
-			// 	xit('responds with a verified object containing credentials and order history', ()=> {
-					
-			// 	});
-
-			// 	xit('responds to invalid request with 500 status and error message in body', () => {
-
-			// 	});
-
-			// });
+			});
 
 		});
 
 
-		//product routes include products and purchase. Getting products will retrieve all products in inventory for sale
-		//purchase will create an order and return an obj containing order and history
+		//products route include products and purchase. Getting products will retrieve all products in inventory for sale
 		describe('/products', ()=> {
-			// describe('GET /products', () => {
-			// 	it('responds with 200 status and application/json content type with object containing products', ()=> {
+			describe('GET /products', () => {
+				it('responds with 200 status and application/json content type with an array containing product objects',
+				 async () => {
+					const response = await request(server)
+					.get('/products/products')
+					expect(response.status).toEqual(200);
+					expect(response.headers['content-type']).toMatch(/json/);
+					expect(response.body.products[0]).toEqual({
+						description: 'tarzan',
+						category: 'dvds',
+						price: 10.99,
+						purchased: 'false',
+					});
+			 	});
+				it('does not return products that are already purchased', async () => {
+					const response = await request(server)
+					.get('/products/products')
+					expect(response.body.products[0].purchased).toEqual('false');
+				});
 
-			// 	});
+				xit('responds to invalid request with 500 status', async () => {
+					const response = await request(server)
+					.post('/products/products')
+					.send('bad-request')
+					.set('Accept', 'application/json');
+				expect(response.headers['content-type']).toMatch(/json/);
+				expect(response.status).toEqual(500);
+			 	});
+			});
+			//purchase will create an order and return an obj containing order and history
+			describe('POST /purchase', () => {
+				it('responds with 200 status and application/json content type with object containing order and history',
+				 async () => {
+					const response = await request(server)
+					.post('/products/purchase')
+					.send({
+						//array of product ids
+						products: [1],
+						//buyer user id
+						buyer_id: 1,
+					})
+					.set('Accept', 'application/json');
+					expect(response.status).toEqual(200);
+					expect(response.headers['content-type']).toMatch(/json/);
+					expect(response.body.order).toEqual({
+						confirmed: true,
+						_id: 1,
+						buyer_id: 1,
+						shipping_status: 'pending',
+						cost: 10.99,
+						date: new Date()
+					})
+			 	});
 
-			// 	xit('responds to invalid request with 500 status and error message in body', () => {
+				//add to test that purchased object is updated in database as purchased = true?
 
-			// 	});
-			// });
-
-			// describe('POST /purchase', ()=> {
-			// 	it('responds with 200 status and application/json content type with object containing order and history', () => {
-
-			// 	});
-
-			// 	xit('responds to invalid request with 500 status and error message in body', () => {
-
-			// 	});
-			// });
+			 	xit('responds to invalid request with 500 status', async () => {
+					const response = await request(server)
+					.post('/products/purchase')
+					.send('bad-request')
+					.set('Accept', 'application/json');
+				expect(response.headers['content-type']).toMatch(/json/);
+				expect(response.status).toEqual(500);
+			 	});
+			});
 
 		})
 
