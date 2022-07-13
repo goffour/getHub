@@ -26,12 +26,12 @@ const Signup = () => {
     .then (response => response.json())
     .then (data => {
       if (data.verified) {
-        setLocation('/dashboard');
+        setLocation('/');
       }
     })
     .catch (err => {
       alert(err);
-      setLocation('/');
+      setLocation('/signup');
     })
   }
   return (
