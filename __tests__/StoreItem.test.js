@@ -16,7 +16,7 @@ describe('Unit testing for store item', () => {
   };
   
   beforeEach(() => {
-    item = render(<StoreItem {...props} />);
+    item = render(<StoreItem data={...props} />);
   })
 
   test('Item should render the appropriate elements', () => {

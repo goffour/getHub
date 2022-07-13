@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 // TODO: make dashboard component
 import ItemContainer from './components/ItemContainer.jsx';
 // -------------------------
-import { Route } from 'wouter';
+import { Route, Switch } from 'wouter';
 import { AuthProvider, ProtectedRoute } from './lib/AuthProvider.jsx';
-import Shop from '../client/components/Shop.jsx'
-  
-const App = (props) => {
-  const dummyData = [{
+import Shop from '../client/components/Shop.jsx';
+import Cart from '../client/Components/Cart.jsx';
+import Profile from '../client/Components/Profile.jsx';
+const dummyData = [
+  {
     _id: 0,
     seller_id: 0,
     desc: 'An item made by jake',
@@ -40,19 +41,47 @@ const App = (props) => {
     category: 'Rolex',
     price: 100000,
     file_location: 3
-    }];
-  
-  
+  }
+];
+
+
+const App = (props) => {
+
+  const [store, setStore] = useState(dummyData);
+  const [history, setHistory] = useState([]); 
+  const [cartHistory, setCartHistory] = useState([]);
+  console.log('updated cart histroy', cartHistory)
   return (
     <AuthProvider>
-      <Route path='/' component={Login}/>
-      <Route path='/signup' component={Signup} />
-      <Route path='/dashboard'>
-        <ProtectedRoute>
-          <Shop>
-            <ItemContainer data ={dummyData} />
-          </Shop>
-        </ProtectedRoute>
+      <Route path='/'>
+        <Login setHistory={setHistory} />
+      </Route>
+
+      <Route path='/signup'>
+        <Signup />
+      </Route>
+
+      <Route path='/dashboard/:endpoint'>
+        {(params) => {
+          let component;
+          switch (params.endpoint) {
+            case 'profile':
+              component = <Profile />;
+              break;
+            case 'cart':
+              component = <Cart cartHistory={cartHistory} setCartHistory={setCartHistory} />;
+              break;
+            case 'store':
+              component = <ItemContainer data={store} setCartHistory={setCartHistory} cartHistory={cartHistory} />;
+              break
+          };
+          return (
+          <ProtectedRoute>
+            <Shop>
+              {component}
+            </Shop>
+          </ProtectedRoute>)
+        }}
       </Route>
     </AuthProvider>
   )

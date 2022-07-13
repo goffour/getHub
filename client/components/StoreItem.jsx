@@ -1,25 +1,23 @@
 import React from 'react';
 import LabelText from './LabelText.jsx';
 import ItemLabelContainer from './ItemLabelContainer.jsx';
+import { formatter } from '../lib/currencyFormatters.js';
 
-// Formatting fro currnecy is currently in en-us. Could consider checkcing 
-// the actuall settings for the browser.
-const formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  maximumFractionDigits: 0
-});
 
 const StoreItem = (props) => {
   return (
     <div className='item-group'>
-      <img src={props.file_location} className='content-img'></img>
+      <img src={props.data.file_location} className='content-img'></img>
       <div className='details'>
         <ItemLabelContainer>
-          <LabelText label='Description' value={props.desc} />
-          <LabelText label='Price' value={formatter.format(props.price)} />
+          <LabelText label='Description' value={props.data.desc} />
+          <LabelText label='Price' value={formatter.format(props.data.price)} />
         </ItemLabelContainer>
-        <button className='btn-buy'>Buy</button>
+        <button
+          className='btn-buy'
+          onClick={() => props.setCartHistory([...props.cartHistory, props.data])}>
+          Add to Cart
+        </button>
       </div>
     </div>
   )

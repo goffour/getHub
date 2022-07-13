@@ -13,7 +13,7 @@ const Navbar = () => {
         <p id=''>{userContext.first_name[0]}{userContext.last_name[0]}</p>
       </Link>
 
-      <Link to='/cart'>
+      <Link to='/dashboard/cart'>
         <a>Cart</a>
         {/* <img src={profilePic}/> */}
       </Link>
