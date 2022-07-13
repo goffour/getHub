@@ -9,19 +9,19 @@ const Signup = () => {
   const [password, setPassword] = useState('');
 
   const checkSignup = () => {
-    const newUserInfo = {
-      firstName: firstName,
-      lastName: lastName,
+    const credentials = {
+      first_name: firstName,
+      last_name: lastName,
       email: email,
       username: username,
       password: password
     };
-    fetch('/user/signup', {
+    fetch('http://localhost:3000/user/signup', {
       method: 'POST',
       headers: {
-        'Content-Type': 'Application/JSON'
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(userInfo)
+      body: JSON.stringify({credentials})
     })
     .then (response => response.json())
     .then (data => {

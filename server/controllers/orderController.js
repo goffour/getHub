@@ -21,16 +21,16 @@ store return object in res.locals.order
 orderController.createOrder = (req, res, next) => {
 
 	//destructure products array and buyer_id
-	const { buyer_id } = req.body.order;
+	const { buyer_id, cost, date } = req.body.order;
+
+	console.log('in create order', buyer_id)
 
 	//generate new order entry in order table
 	const query = `INSERT INTO "order" (buyer_id, shipping_status, cost, date)
 									VALUES ($1, $2, $3, $4)
 									RETURNING _id, buyer_id, shipping_status, cost, date`;
 
-	//todo: cost and dates need to be changed
-	const date = new Date();
-	const values = [buyer_id, 'pending', '100.00', date];
+	const values = [buyer_id, 'pending', cost, date];
 
 	db.query(query, values)
 		.then(response => {
@@ -57,12 +57,11 @@ orderController.createOrder = (req, res, next) => {
 
 orderController.getOrderList = (req, res, next) => {
 
-	const { user_id } = req.body.order;
-	
-	const query = `SELECT * FROM "order" WHERE buyer_id=${user_id}`;
+	const { _id } = res.locals.verified;
+	const query = `SELECT * FROM "order" WHERE buyer_id=${_id}`;
 	db.query(query)
 		.then(response => {
-			console.log('in getOrderList', response.rows);
+			console.log('in getOrderList', response);
 
 			res.locals.history = response.rows;
 			return next();

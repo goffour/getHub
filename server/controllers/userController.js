@@ -110,6 +110,9 @@ userController.loginUser = (req, res, next) => {
 	const { credentials } = req.body;
 	const { username, password } = credentials;
 
+
+
+	console.log('in login user', credentials);
 	//check for inputs
 	if(!username || !password) {
 		return next({
@@ -124,7 +127,7 @@ userController.loginUser = (req, res, next) => {
 	
 	db.query(query, values)
 		.then(response => {
-
+			console.log('Query completed successfully')
 			const { _id, first_name, last_name, email, username, address, zipcode } = response.rows[0];
 			const verified = {
 					isVerified: true,
@@ -136,7 +139,7 @@ userController.loginUser = (req, res, next) => {
 					address, 
 					zipcode
 				};
-
+				console.log('isVerified is ',verified.isVerified);
 				res.locals.verified = verified;
 				return next();
 			})

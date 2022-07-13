@@ -3,14 +3,15 @@ import LabelText from './LabelText.jsx';
 import ItemLabelContainer from './ItemLabelContainer.jsx';
 import { formatter } from '../lib/currencyFormatters.js';
 
-
 const StoreItem = (props) => {
+  const imgString = `http://localhost:3000/${props.data.file_location}`
   return (
     <div className='item-group'>
-      <img src={props.data.file_location} className='content-img'></img>
+      <img src={imgString} className='content-img'></img>
+      {/* <img src='/Users/jchen/Documents/GitHub/getHub/client/assets/javascript.png' className='content-img'></img> */}
       <div className='details'>
         <ItemLabelContainer>
-          <LabelText label='Description' value={props.data.desc} />
+          <LabelText label='Description' value={props.data.description} />
           <LabelText label='Price' value={formatter.format(props.data.price)} />
         </ItemLabelContainer>
         <button

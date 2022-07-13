@@ -9,6 +9,7 @@ import { AuthProvider, ProtectedRoute } from './lib/AuthProvider.jsx';
 import Shop from '../client/components/Shop.jsx';
 import Cart from '../client/Components/Cart.jsx';
 import Profile from '../client/Components/Profile.jsx';
+
 const dummyData = [
   {
     _id: 0,
@@ -50,7 +51,8 @@ const App = (props) => {
   const [store, setStore] = useState(dummyData);
   const [history, setHistory] = useState([]); 
   const [cartHistory, setCartHistory] = useState([]);
-  // console.log('updated cart histroy', cartHistory);
+  console.log('updated cart histroy', cartHistory)
+  console.log('updated Store', store);
   return (
     <AuthProvider>
       <Route path='/'>
@@ -73,11 +75,11 @@ const App = (props) => {
               break;
             case 'store':
               component = <ItemContainer data={store} setCartHistory={setCartHistory} cartHistory={cartHistory} />;
-              break
+              break;
           };
           return (
           <ProtectedRoute>
-            <Shop>
+            <Shop setStore ={setStore}>
               {component}
             </Shop>
           </ProtectedRoute>)
