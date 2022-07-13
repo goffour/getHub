@@ -23,8 +23,8 @@ orderController.createOrder = (req, res, next) => {
 
 //retrieve orders for a certain user with user_id and store in res.locals.history
 orderController.getOrders = (req, res, next) => {
-
-
+	res.locals.history = {};
+	return next();
 }
 
 

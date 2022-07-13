@@ -8,7 +8,7 @@ const productController = require('../controllers/productController');
 	retrieve all products
 */
 router.get('/products', 
-	// productController.getProducts,
+	productController.getProducts,
 	(req, res)=> {
 		return res.status(200).json({products: res.locals.products});
 });
@@ -30,6 +30,7 @@ router.get('/products',
 */
 router.post('/purchase',
 	// orderController.createOrder,
+	// orderController.getOrders,
 	// productController.buyProducts,
 	(req, res)=> {
 		return res.status(200).json({order: res.locals.order, history: res.locals.history});
